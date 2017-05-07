@@ -36,9 +36,10 @@ public class Disk {
 		c.getEmptySpace();
 		c.getEmptySlots();
 
-		String cmd= "file.txt 100000 VFSD:\\Folder1";
+		String cmd= "file.txt 900008 VFSD:\\Folder1";
 		
 		c.CreateFile(cmd);
+		
 		
 		c.DisplaySlots();
 	}

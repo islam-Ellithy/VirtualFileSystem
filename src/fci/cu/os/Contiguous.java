@@ -6,8 +6,9 @@ import java.util.Vector;
 public class Contiguous implements AllocationInterface {
 
 	Block[] blocks;
-	File file ;
-	Scanner sc ;
+	File file;
+	Scanner sc;
+
 	Contiguous(Block[] blocks) {
 		this.blocks = blocks;
 	}
@@ -63,64 +64,95 @@ public class Contiguous implements AllocationInterface {
 		// TODO Auto-generated method stub
 		cmd = cmd.trim();
 		int p1 = cmd.indexOf(" ");
-		String name = cmd.substring(0,p1),path;
-		int size ;
-		cmd = cmd.substring(p1+1,cmd.length());
+		String name = cmd.substring(0, p1), path;
+		int size;
+		cmd = cmd.substring(p1 + 1, cmd.length());
 		cmd = cmd.trim();
 		p1 = cmd.indexOf(" ");
-		size = Integer.parseInt(cmd.substring(0,p1));
-		cmd = cmd.substring(p1+1,cmd.length());
+		size = Integer.parseInt(cmd.substring(0, p1));
+		cmd = cmd.substring(p1 + 1, cmd.length());
 		cmd = cmd.trim();
-		path = cmd ;
-		System.out.println(name);
-		System.out.println(size);
-		System.out.println(path);
-		
-		int idx = findEmptyBlock(size);
-		
-		System.out.println(idx);
-		if(idx!=-1)
-		{
-			blocks[idx].setAllocatedSize(size) ;
-		}
+		path = cmd;
+		int idx , temp = -1;
+		boolean flag = true;
+		int c =  0;
+		while (flag) {
 
+			idx = findEmptyBlock(size);
+
+			System.out.println("idx " + idx);
+
+			
+			if (idx != -1) {
+				
+				blocks[idx].setAllocatedSize(size);
+				
+				if(temp!=-1)
+					blocks[temp].setNextPtr(idx);
+				
+				size = blocks[idx].getReminder();
+
+				temp = idx ;
+				
+				if (size != 0) {
+		
+
+				}
+				else
+				{
+					break ;
+				}
+			}else
+			{
+				break ;
+			}
+		}
+		
 	}
 
-	void DisplaySlots()
-	{
-		for(Block b : blocks)
-		{
+	void DisplaySlots() {
+		System.out.println("Free Allocated nextPtr");
+		for (Block b : blocks) {
 			System.out.println(b);
 		}
 	}
-	int findEmptyBlock(int sz)
-	{
-		for(int i = 0 ;i<blocks.length;i++)
-		{
-			if(sz <= blocks[i].getSize())
-			{
-				return i ;
+
+	int findEmptyBlock(int sz) {
+		int rem = 0;
+		if (sz > 100000) {
+			rem = sz / 100000;
+			if(rem>=1)
+				rem--;
+			rem *= 100000;
+			rem += sz%100000;
+			sz -= rem;
+			System.out.println("rem "+rem+"\t"+sz);
+		}
+
+		for (int i = 0; i < blocks.length; i++) {
+			if (sz <= blocks[i].getSize()) {
+				return i;
 			}
 		}
-		return -1 ;
+		return -1;
 	}
-	
+
 	@Override
 	public void CreateFolder(String cmd) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void DeleteFolder(String cmd) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void DeleteFile(String cmd) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
