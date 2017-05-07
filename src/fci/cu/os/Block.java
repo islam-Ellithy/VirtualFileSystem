@@ -46,8 +46,6 @@ public class Block {
 			sz -= reminder ;
 			this.allocatedSize = sz ;;
 		}
-		System.out.println("rem = "+reminder);
-		System.out.println("alloc = "+allocatedSize);
 		
 		this.allocatedSize = sz;
 
@@ -64,6 +62,6 @@ public class Block {
 
 	@Override
 	public String toString() {
-		return String.format("%d %d %d\t", size, allocatedSize, nextPtr);
+		return String.format("%d %d %d %d \t", size, allocatedSize,reminder, nextPtr);
 	}
 }

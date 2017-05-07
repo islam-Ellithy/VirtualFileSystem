@@ -73,45 +73,44 @@ public class Contiguous implements AllocationInterface {
 		cmd = cmd.substring(p1 + 1, cmd.length());
 		cmd = cmd.trim();
 		path = cmd;
-		int idx , temp = -1;
+		int idx, temp = -1;
 		boolean flag = true;
-		int c =  0;
-		while (flag) {
+		int c = 0;
 
-			idx = findEmptyBlock(size);
+		if (size <= this.getEmptySpace()) {
+			while (flag) {
 
-			System.out.println("idx " + idx);
+				idx = findEmptyBlock(size);
 
-			
-			if (idx != -1) {
-				
-				blocks[idx].setAllocatedSize(size);
-				
-				if(temp!=-1)
-					blocks[temp].setNextPtr(idx);
-				
-				size = blocks[idx].getReminder();
+				if (idx != -1) {
 
-				temp = idx ;
-				
-				if (size != 0) {
-		
+					blocks[idx].setAllocatedSize(size);
 
+					if (temp != -1)
+						blocks[temp].setNextPtr(idx);
+
+					size = blocks[idx].getReminder();
+
+					temp = idx;
+
+					if (size != 0) {
+
+					} else {
+						break;
+					}
+				} else {
+					System.out.println("There is no size in the disk");
+					break;
 				}
-				else
-				{
-					break ;
-				}
-			}else
-			{
-				break ;
 			}
+		}else
+		{
+			System.out.println("There is no size in the disk");
 		}
-		
 	}
 
 	void DisplaySlots() {
-		System.out.println("Free Allocated nextPtr");
+		System.out.println("Free Allocated Reminder nextPtr");
 		for (Block b : blocks) {
 			System.out.println(b);
 		}
@@ -121,12 +120,11 @@ public class Contiguous implements AllocationInterface {
 		int rem = 0;
 		if (sz > 100000) {
 			rem = sz / 100000;
-			if(rem>=1)
+			if (rem >= 1)
 				rem--;
 			rem *= 100000;
-			rem += sz%100000;
+			rem += sz % 100000;
 			sz -= rem;
-			System.out.println("rem "+rem+"\t"+sz);
 		}
 
 		for (int i = 0; i < blocks.length; i++) {
