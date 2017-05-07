@@ -8,7 +8,8 @@ public class VirtualFileSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		Disk disk = new Disk();
+		disk.DisplayStatus();
 	}
 
 }

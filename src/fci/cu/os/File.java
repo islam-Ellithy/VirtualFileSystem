@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 
 public class File extends Path {
-	String type;
-	int size;
+	public String type;
+	public int size;
 
 
 	public File() {

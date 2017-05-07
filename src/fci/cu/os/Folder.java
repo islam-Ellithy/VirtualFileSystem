@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Folder extends Path {
 
-	ArrayList<Path> paths ;
-
+	ArrayList<Folder> folders ;
+	ArrayList<File> files ;
 	
 	public Folder() {
-
-		paths = new ArrayList<Path>();
+		folders = new ArrayList<Folder>();
+		files = new ArrayList<File>();
 	}
 
 }
